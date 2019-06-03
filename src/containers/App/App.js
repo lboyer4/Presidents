@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { setPresidents } from '../../actions';
 import { connect } from 'react-redux';
+import { Header } from './../../components/Header/Header.js';
+import CardHolder from '../CardHolder/CardHolder.js';
 
 export class App extends Component {
   constructor() {
@@ -26,6 +28,8 @@ export class App extends Component {
   render(){
     return(
       <div>
+        <Header />
+        <CardHolder />
       </div>
 
     )

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import { setPresidents } from '../../actions';
+import { connect } from 'react-redux';
 
 export class App extends Component {
   constructor() {
@@ -14,8 +16,12 @@ export class App extends Component {
   componentDidMount = () => {
     fetch('http://localhost:3001/api/v1/presidents')
     .then(response => response.json())
-    .then(results => console.log(results))
+    .then(presidents=> this.props.setPresidents(presidents))
+    .catch(error => this.setState({ error }))
+    
   }
+
+
 
   render(){
     return(
@@ -26,4 +32,8 @@ export class App extends Component {
   }
 }
 
-export default App;
+export const mapDispatchToProps = (dispatch) => ({
+  setPresidents: (presidents)=> dispatch(setPresidents(presidents))
+})
+
+export default connect(null, mapDispatchToProps)(App)

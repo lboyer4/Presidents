@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import { setPresidents } from '../../actions';
+import { setPresidents, setError, setLoading } from '../../actions';
 import { connect } from 'react-redux';
 import { Header } from './../../components/Header/Header.js';
 import CardHolder from '../CardHolder/CardHolder.js';
@@ -11,6 +11,7 @@ export class App extends Component {
     super()
     this.state = {
       presidents: [],
+      loading: 'isLoading..',
       error: ''
     }
   }
@@ -18,18 +19,22 @@ export class App extends Component {
   componentDidMount = () => {
     fetch('http://localhost:3001/api/v1/presidents')
     .then(response => response.json())
-    .then(presidents=> this.props.setPresidents(presidents))
-    .catch(error => this.setState({ error }))
-    
+    .then(presidents=> this.makeThePresidents(presidents))
+    .catch(error => alert('there is a problem', error))
+
   }
 
-
+  makeThePresidents = (presidents) => {
+      this.setState( { presidents })
+      this.props.setPresidents(presidents)
+  }
 
   render(){
+    const display = this.state.presidents.length ? <CardHolder /> : this.state.loading
     return(
       <div>
         <Header />
-        <CardHolder />
+        {display}
       </div>
 
     )
@@ -37,7 +42,7 @@ export class App extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  setPresidents: (presidents)=> dispatch(setPresidents(presidents))
+  setPresidents: (presidents)=> dispatch(setPresidents(presidents)),
 })
 
 export default connect(null, mapDispatchToProps)(App)

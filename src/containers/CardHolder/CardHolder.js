@@ -9,6 +9,7 @@ export const CardHolder = (props) => {
 	const presidentCard = props.presidents.map(president => {
 		return <Card {...president} key={president.id} />
 	})
+	console.log(props.loading)
 	return (
 		<section className="holder">
 			{presidentCard}
@@ -17,7 +18,8 @@ export const CardHolder = (props) => {
 }
 
 export const mapStateToProps = (state) => ({
-	presidents: state.presidentsReducer
+	presidents: state.presidentsReducer,
+	
 });
 
 export default connect(mapStateToProps)(CardHolder)

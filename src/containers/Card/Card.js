@@ -27,5 +27,3 @@ export class Card extends Component {
 }
 
 export default Card;
-
-// number, president, birth_year, death_year, took_office, left_office, party

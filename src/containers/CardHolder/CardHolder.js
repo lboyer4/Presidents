@@ -22,4 +22,4 @@ export const mapStateToProps = (state) => ({
 	
 });
 
-export default connect(mapStateToProps)(CardHolder)
+export default connect(mapStateToProps)(CardHolder) 

@@ -1,3 +1,7 @@
 .holder {
-	
+	display: flex;
+	flex-wrap: wrap;
+	background-color: red;
+	margin: auto;
+	justify-content: space-between;
 }
